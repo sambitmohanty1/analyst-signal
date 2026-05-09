@@ -1,8 +1,10 @@
 // app/page.tsx
 import { kv } from '@vercel/kv';
 import { Title, Text, Grid, Card } from "@tremor/react";
-import ScorecardTable from "@/components/ScorecardTable";
-import { StockSignal } from "@/lib/types";
+
+// FIXED: Using relative paths instead of @/ alias
+import ScorecardTable from "../components/ScorecardTable";
+import { StockSignal } from "../lib/types";
 
 export const dynamic = 'force-dynamic';
 export const preferredRegion = 'syd1';
@@ -14,7 +16,6 @@ export default async function Dashboard() {
     return <div className="p-10 text-slate-500">Initializing Engine... Run Cron to see data.</div>;
   }
 
-  // Force strict timezone formatting to prevent Next.js hydration errors
   const formattedDate = new Date(data.updatedAt).toLocaleString('en-AU', {
     timeZone: 'Australia/Sydney',
     dateStyle: 'medium',
