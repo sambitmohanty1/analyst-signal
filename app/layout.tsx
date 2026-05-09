@@ -1,5 +1,4 @@
-// app/layout.tsx
-import './globals.css'; // Make sure this points to your Tailwind CSS file
+import './globals.css';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -7,7 +6,7 @@ export const metadata: Metadata = {
   description: 'Weekly Weighted Analyst Scorecard',
 };
 
-// You can also enforce the Sydney region globally here
+// Enforce Sydney region for sovereign cloud compliance
 export const preferredRegion = 'syd1';
 
 export default function RootLayout({
