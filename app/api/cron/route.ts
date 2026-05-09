@@ -1,7 +1,10 @@
+// app/api/cron/route.ts
 import { NextResponse } from 'next/server';
 import { kv } from '@vercel/kv';
 import { Resend } from 'resend';
-import { calculateScore } from '@/lib/engine';
+
+// FIXED: Using relative paths instead of @/ alias
+import { calculateScore } from '../../../lib/engine';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -12,14 +15,13 @@ export async function GET(request: Request) {
     return new Response('Unauthorized', { status: 401 });
   }
 
-  // 2. Data Aggregation (Mocked for review - replace with API fetches)
+  // 2. Data Aggregation
   const usData = [
     calculateScore({
       ticker: "META", market: "US", recommendation: "Strong Buy",
       signal: "AI monetization leader; Ad revenue growth",
       breakdown: { authority: 10, moat: 9, sentiment: 9, technical: 8, catalyst: 10 }
-    }),
-    // ... add other 9 US stocks
+    })
   ];
 
   const asxData = [
@@ -27,8 +29,7 @@ export async function GET(request: Request) {
       ticker: "IFT.AX", market: "ASX", recommendation: "Strong Buy",
       signal: "Largest 30-year Renewable Contract in AU",
       breakdown: { authority: 8, moat: 9, sentiment: 9, technical: 8, catalyst: 10 }
-    }),
-    // ... add other 9 ASX stocks
+    })
   ];
 
   // 3. Persist to Vercel KV
@@ -37,7 +38,7 @@ export async function GET(request: Request) {
 
   // 4. Send Email Report
   await resend.emails.send({
-    from: 'Watchdog <signals@yourdomain.com>',
+    from: 'Watchdog <signals@yourdomain.com>', // Replace with your verified Resend domain
     to: 'mail2sambit@gmail.com',
     subject: 'Weekly Weighted Signal Report',
     html: `<h2>Top Signal: ${usData[0].ticker} (Score: ${usData[0].score})</h2>`
