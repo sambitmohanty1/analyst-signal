@@ -1,11 +1,10 @@
 // app/page.tsx
 import { kv } from '@vercel/kv';
-// Removed unused 'Metric' import to prevent ESLint build errors
 import { Title, Text, Grid, Card } from "@tremor/react";
 import ScorecardTable from "@/components/ScorecardTable";
 import { StockSignal } from "@/lib/types";
 
-export const dynamic = 'force-dynamic'; 
+export const dynamic = 'force-dynamic';
 export const preferredRegion = 'syd1';
 
 export default async function Dashboard() {
