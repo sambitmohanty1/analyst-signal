@@ -1,3 +1,4 @@
+// app/page.tsx
 import { kv } from '@vercel/kv';
 import { Title, Text, Grid, Card, Metric } from "@tremor/react";
 import ScorecardTable from "@/components/ScorecardTable";
